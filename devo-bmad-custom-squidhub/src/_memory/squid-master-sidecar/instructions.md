@@ -957,7 +957,7 @@ flowchart TD
 
 Chain: `Quick Spec → Quick Dev → Review Gate (3 sub-agents: AR+DRY · UV · SR) → QA Tests (Playwright) → ⛔ USER APPROVAL → /prepare-to-merge`
 
-**QA Enforcement (Small):** Always use `@playwright/test` directly. NEVER use playwright MCP tools (`mcp__playwright__*`). The QA agent must write `.spec.ts` files using the Playwright test runner CLI. Test files must import from `@playwright/test`, not from any MCP adapter.
+**QA Enforcement (Small):** Always use `@playwright/test` directly via `cd frontend && npx playwright test`. NEVER use playwright MCP tools (`mcp__playwright__*`). The QA agent must write `.spec.ts` files and run them with `npx playwright test`. Test files must import from `@playwright/test`, not from any MCP adapter. If Chromium is not installed, run `npx playwright install chromium` first.
 
 **AR pass criterion (Small):** ONE pass only — no retry loop. **Small track overrides the general AR autonomous loop — 1 pass maximum regardless of general AR rules.** Each review sub-agent fixes ALL its own findings (🔴/🟡/🟢) in the same pane before reporting back — no separate dev agent handoff. If 🔴 persists after one fix attempt: escalate to user.
 
@@ -1004,7 +1004,7 @@ flowchart TD
 
 Chain: `Quick Spec → Research (1–2 in-process) → UX Design → Review Gate 1 (3 sub-agents: AR+DRY · UV · SR) → Quick Dev → Final Review Gate (3 sub-agents: AR+DRY · UV · SR) → QA Tests (Playwright) → ⛔ USER APPROVAL → /prepare-to-merge`
 
-**QA Enforcement (Medium):** Use `@playwright/test` directly. NEVER use playwright MCP tools. QA agent writes `.spec.ts` files only.
+**QA Enforcement (Medium):** Use `@playwright/test` directly via `cd frontend && npx playwright test`. NEVER use playwright MCP tools. QA agent writes `.spec.ts` files and runs them with `npx playwright test`. If Chromium is not installed, run `npx playwright install chromium` first.
 
 **Research step:** 1–2 in-process analyst-agent sub-agents depending on task scope. UI-heavy: one explores codebase, one researches design patterns online. Backend-only: one agent suffices. If research reveals task is infeasible or out of scope, agents report to Squid-Master who HALTS and presents findings to user before proceeding to Review Gate 1.
 
@@ -1148,7 +1148,7 @@ When a story reaches `story-done` state, Squid-Master AUTOMATICALLY spawns a `qa
 
 On QA pass: proceed to next story or Epic Retrospective. On QA failure: route back to Dev Story agent (split pane) with failing test output.
 
-**QA Enforcement (Large):** `@playwright/test` only. NEVER use playwright MCP tools. QA sub-agent writes `.spec.ts` files and runs them via Playwright CLI.
+**QA Enforcement (Large):** `@playwright/test` only via `cd frontend && npx playwright test`. NEVER use playwright MCP tools. QA sub-agent writes `.spec.ts` files and runs them with `npx playwright test`. If Chromium is not installed, run `npx playwright install chromium` first.
 
 **Per-Story Dev Agent (Large Track):**
 For large stories (3+ files or includes UX work), spawn a **new dedicated dev agent** per story in split pane:
@@ -1234,7 +1234,7 @@ flowchart TD
 
 Chain: `Quick Spec → Quick Research (1 analyst, optional) → Quick Dev → Review Gate (3 sub-agents: AR+DRY · UV · SR) → QA Tests (Playwright) → ⛔ USER APPROVAL → PTM`
 
-**QA Enforcement (Compact):** Use `@playwright/test` directly. NEVER use playwright MCP tools. QA agent writes `.spec.ts` files only.
+**QA Enforcement (Compact):** Use `@playwright/test` directly via `cd frontend && npx playwright test`. NEVER use playwright MCP tools. QA agent writes `.spec.ts` files and runs them with `npx playwright test`. If Chromium is not installed, run `npx playwright install chromium` first.
 
 **Research decision:** Optional — Squid-Master decides at QS completion:
 - Unfamiliar codebase area → spawn 1 analyst (codebase exploration)
@@ -1285,7 +1285,7 @@ flowchart TD
 
 Chain: `Quick Spec → Research (2 in-process) → PRD → UX Design + Arch Notes + Sprint Plan (same session) → Review Gate 1 (3 sub-agents: AR+DRY · UV · SR — reviews all plans vs PRD) → Dev (split pane) → Review Gate 2 (3 sub-agents: AR+DRY · UV · SR) → QA Tests (Playwright) → ⛔ USER APPROVAL → PTM`
 
-**QA Enforcement (Extended):** Use `@playwright/test` directly. NEVER use playwright MCP tools. QA agent writes `.spec.ts` files only.
+**QA Enforcement (Extended):** Use `@playwright/test` directly via `cd frontend && npx playwright test`. NEVER use playwright MCP tools. QA agent writes `.spec.ts` files and runs them with `npx playwright test`. If Chromium is not installed, run `npx playwright install chromium` first.
 
 **Research scope:** Always 2 agents:
 1. Codebase exploration agent (what files/patterns are involved?)
