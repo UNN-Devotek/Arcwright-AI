@@ -3,11 +3,19 @@
 > Cross-session user preferences and team context. Populated during first live session.
 > Updated by Squid-Master when user preferences are expressed or patterns are observed.
 
-last_updated: "2026-03-15"
+last_updated: "2026-03-29"
+
+## Project Paths
+
+project_root: "/mnt/d/Shared Drives Folder/SQUID/Squidhub"  # moved — was D:/SQUID/Squidhub
+worktrees_dir: "/mnt/d/Shared Drives Folder/SQUID/Squidhub_worktrees"
+windows_project_root: "D:\\Shared Drives Folder\\SQUID\\Squidhub"
+windows_worktrees_dir: "D:\\Shared Drives Folder\\SQUID\\Squidhub_worktrees"
 
 ## User Preferences
 
-execution_mode_preference: 2  # 1=same-conv | 2=command blocks | 3=launch scripts | 4=agent teams
+execution_mode_preference: 4  # 1=same-conv | 2=command blocks | 3=launch scripts | 4=agent teams
+agent_spawn_style: split-pane  # sub-agents get their own tmux pane (master LEFT, agents RIGHT), closed when done
 confirmed_without_asking: false
 preferred_branch_prefix: feat
 

@@ -47,6 +47,26 @@ async function install(opts) {
     }
   }
 
+  // Wipe addon-owned directories before copy so stale/removed files don't persist
+  const ownedDirs = [
+    path.join(bmadDir, '_memory', 'squid-master-sidecar'),
+    path.join(bmadDir, 'squidhub'),
+  ];
+  for (const dir of ownedDirs) {
+    if (await fs.pathExists(dir)) {
+      await fs.remove(dir);
+    }
+  }
+
+  // Remove stale bmad-track-* slash commands from project root
+  const cmdDir = path.join(projectRoot, '.claude', 'commands');
+  if (await fs.pathExists(cmdDir)) {
+    const existing = await glob('bmad-track-*.md', { cwd: cmdDir });
+    for (const f of existing) {
+      await fs.remove(path.join(cmdDir, f));
+    }
+  }
+
   // Copy all src/ files — route .claude/commands/ to project root, rest to _devo-bmad-custom/
   const files = await glob('**/*', { cwd: SRC_DIR, nodir: true });
   let copied = 0;
