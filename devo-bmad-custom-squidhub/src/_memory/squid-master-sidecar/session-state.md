@@ -14,6 +14,12 @@ track: null
 workflow_step: null
 execution_mode: null
 
+active_team:
+  code: null
+  name: null
+  spawned_at: null
+  panes: {}
+
 linked_feedback_ids: []
 linked_roadmap_ids: []
 
