@@ -8,7 +8,7 @@ This is the **Arcwright workshop** — the editing workspace and build pipeline 
 
 - **npm org:** `@arcwright`
 - **GitHub:** https://github.com/UNN-Devotek/Arcwright-AI
-- **Published package:** `@arcwright/agent-orchestration`
+- **Published packages:** `@arcwright/agent-orchestration`, `@arcwright/tmux-setup`
 
 ## Publishing
 
@@ -20,8 +20,9 @@ This is the **only** place packages are published from. The Squidhub repo keeps 
 
 **To publish:**
 ```bash
-node build/build.js                                    # build package
+node build/build.js                                    # build agent-orchestration package
 cd packages/agent-orchestration && npm publish --access public
+cd packages/tmux-setup && npm publish --access public
 ```
 
 **What gets published:**
@@ -32,7 +33,11 @@ cd packages/agent-orchestration && npm publish --access public
   - `.kiro/steering/` — Kiro steering docs
   - `.claude/commands/arcwright-track-*.md` — slash commands
   - `tmux/` — tmux setup scripts
-- CLI binaries: `arcwright`, `arcwright-install`
+- `@arcwright/tmux-setup` — standalone tmux setup package:
+  - Catppuccin theme, pane title sync, clipboard integration
+  - Agent orchestration scripts, status bar widgets
+  - CLI binary: `arcwright-tmux`
+- CLI binaries: `arcwright`, `arcwright-install`, `arcwright-tmux`
 - Installer supports: Claude Code, Kiro (IDE + CLI), Cursor, Windsurf, Cline, GitHub Copilot, Gemini
 - Install modes: project-level (default) or global (`--global`)
 
@@ -49,10 +54,15 @@ arcwright/
 ├── .claude/commands/        <- Slash commands (arcwright-track-*.md)
 ├── docs/dev/tmux/           <- tmux scripts
 ├── packages/
-│   └── agent-orchestration/ <- npm package
-│       ├── bin/arcwright.js  <- npx entry point
-│       ├── lib/              <- Installer, CLI, platform detection (EDIT THESE)
-│       ├── src/              <- Built output (NEVER edit — wiped on build)
+│   ├── agent-orchestration/ <- npm package (@arcwright/agent-orchestration)
+│   │   ├── bin/arcwright.js  <- npx entry point
+│   │   ├── lib/              <- Installer, CLI, platform detection (EDIT THESE)
+│   │   ├── src/              <- Built output (NEVER edit — wiped on build)
+│   │   └── package.json
+│   └── tmux-setup/          <- npm package (@arcwright/tmux-setup)
+│       ├── bin/arcwright-tmux.js <- npx entry point
+│       ├── lib/              <- Installer, CLI (EDIT THESE)
+│       ├── src/tmux/         <- tmux config + scripts (EDIT THESE)
 │       └── package.json
 ├── build/
 │   └── build.js             <- Workshop packager
