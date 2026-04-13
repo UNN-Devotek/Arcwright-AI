@@ -51,8 +51,7 @@ arcwright/
 │   ├── core/                <- Core orchestrator agent + config
 │   └── _memory/             <- Sidecar memory + skills
 ├── .agents/skills/          <- Skill library (54+ skills, SKILL.md format)
-├── .claude/commands/        <- Slash commands (arcwright-track-*.md)
-├── docs/dev/tmux/           <- tmux scripts
+├── .claude/commands/        <- Slash commands (arcwright-track-*.md, arcwright-migrate.md)
 ├── packages/
 │   ├── agent-orchestration/ <- npm package (@arcwright/agent-orchestration)
 │   │   ├── bin/arcwright.js  <- npx entry point
@@ -114,6 +113,4 @@ The installer (`lib/installer.js`) supports:
 
 This workshop is the **single publish source** for `@arcwright/agent-orchestration`.
 
-The Squidhub project (`/mnt/d/Projects/Unnamed/Squidhub Master/Squidhub-production/`) keeps its own Squidhub-specific overlay files (squid-master persona, MCP templates, etc.) locally in `_bmad/squidhub/` and `_bmad/_memory/squid-master-sidecar/`. These are **not published** — they sit on top of the installed Arcwright package for Squidhub's own use.
-
-The Squidhub packager (`scripts/bmad-build/build.js`) still exists for internal builds but is no longer the publish path.
+The Squidhub project keeps its own Squidhub-specific overlay files (squid-master persona, MCP templates, etc.) locally. These are **not published** — they sit on top of the installed Arcwright package for Squidhub's own use.
