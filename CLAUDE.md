@@ -100,6 +100,29 @@ The installer (`lib/installer.js`) supports:
 
 **Cross-platform:** Windows (WSL2), Linux, macOS. WSL dual-home aware — terminal tools (Claude Code, Gemini) use Linux home, GUI IDEs (Kiro, Cursor, etc.) use Windows home.
 
+**All CLI flags:**
+
+| Flag | Default | What it does |
+|------|---------|--------------|
+| `--yes`, `-y` | false | Skip interactive prompts, accept all defaults |
+| `--global`, `-g` | false | Install to `~/.arcwright` / `~/.claude/` / `~/.kiro/` |
+| `--directory <path>`, `-d` | cwd | Target project root |
+| `--tools <ids>` | `claude-code` | Comma-sep: `claude-code,kiro,cursor,windsurf,cline,github-copilot,gemini` |
+| `--modules <ids>` | `awm,awb,core,_memory` | Which modules to install |
+| `--user-name <name>` | prompted | Your name (written into config.yaml) |
+| `--output-folder <path>` | `_arcwright-output` | Where Arcwright writes output artifacts |
+| `--no-teams` | teams included | Skip the 17 team-* skills and `/team` command |
+| `--docker-check` | not installed | Opt in to `/docker-check` and the `docker-type-check` skill |
+| `--gitignore <mode>` | prompted | `full` / `skills` / `output-only` / `none` — controls what gets added to `.gitignore` |
+
+**Gitignore modes** (project installs only — global installs skip):
+- `output-only` — ignore `_arcwright-output/` only (default / recommended)
+- `skills` — also ignore `.agents/skills/` and `.kiro/skills/`
+- `full` — ignore all Arcwright dirs, commands, and agent stubs
+- `none` — do not modify `.gitignore`
+
+The installer writes a managed `# ─── Arcwright installation ───` block to `.gitignore`. On update, that block is replaced in-place. It never commits to git.
+
 ## Module Reference
 
 | Module | Dir | Contents |
@@ -114,3 +137,24 @@ The installer (`lib/installer.js`) supports:
 This workshop is the **single publish source** for `@arcwright-ai/agent-orchestration`.
 
 The Squidhub project keeps its own Squidhub-specific overlay files (squid-master persona, MCP templates, etc.) locally. These are **not published** — they sit on top of the installed Arcwright package for Squidhub's own use.
+
+<!-- arcwright-agent-start -->
+
+## Arcwright
+
+Arcwright agents, skills, and workflows are installed in `_arcwright/`.
+Key modules: awm, awb, core, _memory
+
+To use an agent, load its `.md` file and follow its activation instructions.
+Agent configs are in `_arcwright/{module}/config.yaml`.
+Skills are in `.agents/skills/` and `_arcwright/_memory/skills/`.
+
+<!-- arcwright-agent-end -->
+
+<!-- arcwright-tmux-start -->
+
+## Agent Spawning (tmux-aware)
+
+If `$TMUX` is set, load `.agents/skills/tmux-protocol/SKILL.md` before any multi-pane work.
+
+<!-- arcwright-tmux-end -->
